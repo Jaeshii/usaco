@@ -10,23 +10,29 @@ public class friday {
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new FileReader("friday.in"));
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("friday.out")));
+
         int N = Integer.parseInt(in.readLine());
         int D = 0;
 //        int offset;
         int[] weekdays = {0, 0, 0, 0, 0, 0, 0};
 
+
         for (int year = 0; year < N; year++) {
             for (int month = 0; month < 12; month++) {
+                // select correct number of days per month
                 int numDays;
                 if (month == 3 || month == 5 || month == 8 || month == 10)
                     numDays = 30;
                 else if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
                     numDays = 31;
                 else
-                    if ((1900 + year) % 4 == 0 && (1900 + year) % 100 != 0)
+                    if ((1900 + year) % 400 == 0)
+                        numDays = 29;
+                    else if ((1900 + year) % 4 == 0 && (1900 + year) % 100 != 0)
                         numDays = 29;
                     else
                         numDays = 28;
+                // iterate through days in month, adding them to D (total number of days)
                 for (int day = 1; day <= numDays; day++) {
                     if (day == 13)
                         weekdays[D % 7]++;
