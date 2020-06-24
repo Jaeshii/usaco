@@ -1,3 +1,9 @@
+/*
+ID: Jaeshi
+LANG: JAVA
+TASK: beads
+*/
+
 import java.io.*;
 
 public class beads {
@@ -14,17 +20,19 @@ public class beads {
             // go right
             int rShift = 0;
             int rStart = 0;
-            while (s.charAt((i + rStart) % n) == s.charAt((i + rShift) % n) && rShift < n) {
-                if (s.charAt((i + rStart) % n) == 'w')
+
+            while ((s.charAt((i + rStart) % n) == s.charAt((i + rShift) % n) || s.charAt((i + rShift) % n) == 'w') && rShift < n) {
+                while (s.charAt((i + rStart) % n) == 'w' && rStart < n)
                     rStart++;
                 rShift++;
             }
+
             // go left
             int lShift = 0;
             int lStart = 0;
-            while (s.charAt((((i - lStart - 1) % n) + n) % n) == s.charAt((((i - lShift - 1) % n) + n) % n) && lShift < n) {
-                if (s.charAt((((i - lStart - 1) % n) + n) % n) + n == 'w')
-                    rStart++;
+            while ((s.charAt((((i - lStart - 1) % n) + n) % n) == s.charAt((((i - lShift - 1) % n) + n) % n) || s.charAt((((i - lShift - 1) % n) + n) % n) == 'w') && lShift < n - rShift) {
+                while (s.charAt((((i - lStart - 1) % n) + n) % n) == 'w' && lStart < n)
+                    lStart++;
                 lShift++;
             }
 
